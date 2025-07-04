@@ -17,17 +17,51 @@
             <div class="nav-container">
                 <div class="nav-logo">
                     <div class="logo-hexagons">
-                        <svg width="50" height="50" viewBox="0 0 60 60" class="logo-svg">
-                            <!-- Central hexagon -->
-                            <polygon points="30,8 42,16 42,32 30,40 18,32 18,16" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
-                            <!-- Top right hexagon -->
-                            <polygon points="42,8 54,16 54,32 42,40 30,32 30,16" fill="none" stroke="#F1D592" stroke-width="1.2" opacity="0.8"/>
-                            <!-- Bottom left hexagon -->
-                            <polygon points="18,28 30,36 30,52 18,60 6,52 6,36" fill="none" stroke="#C9B037" stroke-width="1.2" opacity="0.8"/>
-                            <!-- Connection lines -->
-                            <line x1="30" y1="16" x2="30" y2="32" stroke="#D4AF37" stroke-width="1" opacity="0.6"/>
-                            <line x1="30" y1="32" x2="18" y2="36" stroke="#D4AF37" stroke-width="1" opacity="0.6"/>
-                            <line x1="42" y1="32" x2="30" y2="36" stroke="#D4AF37" stroke-width="1" opacity="0.6"/>
+                        <svg width="50" height="50" viewBox="0 0 80 70" class="logo-svg">
+                            <!-- Define gradients -->
+                            <defs>
+                                <linearGradient id="hexGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#F1D592;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="hexGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:0.8" />
+                                    <stop offset="100%" style="stop-color:#C9B037;stop-opacity:0.8" />
+                                </linearGradient>
+                            </defs>
+                            
+                            <!-- Main cluster - 7 hexagons in honeycomb pattern -->
+                            <!-- Center hexagon -->
+                            <polygon points="40,25 48,20 56,25 56,35 48,40 40,35" fill="url(#hexGrad1)" stroke="#D4AF37" stroke-width="1.5"/>
+                            
+                            <!-- Top hexagon -->
+                            <polygon points="40,10 48,5 56,10 56,20 48,25 40,20" fill="none" stroke="#F1D592" stroke-width="1.2" opacity="0.9"/>
+                            
+                            <!-- Top-right hexagon -->
+                            <polygon points="56,18 64,13 72,18 72,28 64,33 56,28" fill="none" stroke="#C9B037" stroke-width="1" opacity="0.7"/>
+                            
+                            <!-- Bottom-right hexagon -->
+                            <polygon points="56,32 64,27 72,32 72,42 64,47 56,42" fill="url(#hexGrad2)" stroke="#D4AF37" stroke-width="1.2"/>
+                            
+                            <!-- Bottom hexagon -->
+                            <polygon points="40,40 48,35 56,40 56,50 48,55 40,50" fill="none" stroke="#F1D592" stroke-width="1.2" opacity="0.8"/>
+                            
+                            <!-- Bottom-left hexagon -->
+                            <polygon points="24,32 32,27 40,32 40,42 32,47 24,42" fill="none" stroke="#C9B037" stroke-width="1" opacity="0.7"/>
+                            
+                            <!-- Top-left hexagon -->
+                            <polygon points="24,18 32,13 40,18 40,28 32,33 24,28" fill="url(#hexGrad2)" stroke="#D4AF37" stroke-width="1.2"/>
+                            
+                            <!-- Network connection lines -->
+                            <line x1="40" y1="25" x2="48" y2="20" stroke="#D4AF37" stroke-width="1.5" opacity="0.3"/>
+                            <line x1="48" y1="25" x2="56" y2="20" stroke="#D4AF37" stroke-width="1" opacity="0.4"/>
+                            <line x1="56" y1="28" x2="64" y2="27" stroke="#D4AF37" stroke-width="1" opacity="0.4"/>
+                            <line x1="48" y1="35" x2="56" y2="35" stroke="#D4AF37" stroke-width="1" opacity="0.4"/>
+                            <line x1="40" y1="35" x2="32" y2="33" stroke="#D4AF37" stroke-width="1" opacity="0.4"/>
+                            <line x1="32" y1="28" x2="40" y2="25" stroke="#D4AF37" stroke-width="1" opacity="0.4"/>
+                            
+                            <!-- Central connection point -->
+                            <circle cx="48" cy="30" r="1.5" fill="#D4AF37" opacity="0.8"/>
                         </svg>
                     </div>
                     <div class="logo-text">
@@ -264,17 +298,51 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <div class="footer-logo-hexagons">
-                        <svg width="40" height="40" viewBox="0 0 60 60" class="footer-logo-svg">
-                            <!-- Central hexagon -->
-                            <polygon points="30,8 42,16 42,32 30,40 18,32 18,16" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
-                            <!-- Top right hexagon -->
-                            <polygon points="42,8 54,16 54,32 42,40 30,32 30,16" fill="none" stroke="#F1D592" stroke-width="1.2" opacity="0.8"/>
-                            <!-- Bottom left hexagon -->
-                            <polygon points="18,28 30,36 30,52 18,60 6,52 6,36" fill="none" stroke="#C9B037" stroke-width="1.2" opacity="0.8"/>
-                            <!-- Connection lines -->
-                            <line x1="30" y1="16" x2="30" y2="32" stroke="#D4AF37" stroke-width="1" opacity="0.6"/>
-                            <line x1="30" y1="32" x2="18" y2="36" stroke="#D4AF37" stroke-width="1" opacity="0.6"/>
-                            <line x1="42" y1="32" x2="30" y2="36" stroke="#D4AF37" stroke-width="1" opacity="0.6"/>
+                        <svg width="40" height="40" viewBox="0 0 80 70" class="footer-logo-svg">
+                            <!-- Define gradients -->
+                            <defs>
+                                <linearGradient id="footerHexGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#F1D592;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="footerHexGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:0.8" />
+                                    <stop offset="100%" style="stop-color:#C9B037;stop-opacity:0.8" />
+                                </linearGradient>
+                            </defs>
+                            
+                            <!-- Main cluster - 7 hexagons in honeycomb pattern -->
+                            <!-- Center hexagon -->
+                            <polygon points="40,25 48,20 56,25 56,35 48,40 40,35" fill="url(#footerHexGrad1)" stroke="#D4AF37" stroke-width="1.5"/>
+                            
+                            <!-- Top hexagon -->
+                            <polygon points="40,10 48,5 56,10 56,20 48,25 40,20" fill="none" stroke="#F1D592" stroke-width="1.2" opacity="0.9"/>
+                            
+                            <!-- Top-right hexagon -->
+                            <polygon points="56,18 64,13 72,18 72,28 64,33 56,28" fill="none" stroke="#C9B037" stroke-width="1" opacity="0.7"/>
+                            
+                            <!-- Bottom-right hexagon -->
+                            <polygon points="56,32 64,27 72,32 72,42 64,47 56,42" fill="url(#footerHexGrad2)" stroke="#D4AF37" stroke-width="1.2"/>
+                            
+                            <!-- Bottom hexagon -->
+                            <polygon points="40,40 48,35 56,40 56,50 48,55 40,50" fill="none" stroke="#F1D592" stroke-width="1.2" opacity="0.8"/>
+                            
+                            <!-- Bottom-left hexagon -->
+                            <polygon points="24,32 32,27 40,32 40,42 32,47 24,42" fill="none" stroke="#C9B037" stroke-width="1" opacity="0.7"/>
+                            
+                            <!-- Top-left hexagon -->
+                            <polygon points="24,18 32,13 40,18 40,28 32,33 24,28" fill="url(#footerHexGrad2)" stroke="#D4AF37" stroke-width="1.2"/>
+                            
+                            <!-- Network connection lines -->
+                            <line x1="40" y1="25" x2="48" y2="20" stroke="#D4AF37" stroke-width="1.5" opacity="0.3"/>
+                            <line x1="48" y1="25" x2="56" y2="20" stroke="#D4AF37" stroke-width="1" opacity="0.4"/>
+                            <line x1="56" y1="28" x2="64" y2="27" stroke="#D4AF37" stroke-width="1" opacity="0.4"/>
+                            <line x1="48" y1="35" x2="56" y2="35" stroke="#D4AF37" stroke-width="1" opacity="0.4"/>
+                            <line x1="40" y1="35" x2="32" y2="33" stroke="#D4AF37" stroke-width="1" opacity="0.4"/>
+                            <line x1="32" y1="28" x2="40" y2="25" stroke="#D4AF37" stroke-width="1" opacity="0.4"/>
+                            
+                            <!-- Central connection point -->
+                            <circle cx="48" cy="30" r="1.5" fill="#D4AF37" opacity="0.8"/>
                         </svg>
                     </div>
                     <div class="footer-brand-text">

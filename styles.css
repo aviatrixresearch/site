@@ -80,24 +80,54 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .logo-svg, .footer-logo-svg {
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3));
 }
 
 .logo-svg:hover, .footer-logo-svg:hover {
-    transform: scale(1.1) rotate(5deg);
-    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6));
+    transform: scale(1.15) rotate(3deg);
+    filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.8));
 }
 
-.logo-svg polygon, .logo-svg line,
-.footer-logo-svg polygon, .footer-logo-svg line {
-    transition: all 0.3s ease;
+.logo-svg polygon, .logo-svg line, .logo-svg circle,
+.footer-logo-svg polygon, .footer-logo-svg line, .footer-logo-svg circle {
+    transition: all 0.4s ease;
 }
 
-.logo-svg:hover polygon, .logo-svg:hover line,
-.footer-logo-svg:hover polygon, .footer-logo-svg:hover line {
+.logo-svg:hover polygon[fill="none"], 
+.footer-logo-svg:hover polygon[fill="none"] {
     stroke-width: 2px;
     opacity: 1;
+    fill: rgba(212, 175, 55, 0.1);
+}
+
+.logo-svg:hover polygon[fill*="url"], 
+.footer-logo-svg:hover polygon[fill*="url"] {
+    filter: brightness(1.2);
+    stroke-width: 2px;
+}
+
+.logo-svg:hover line,
+.footer-logo-svg:hover line {
+    stroke-width: 2px;
+    opacity: 0.8;
+}
+
+.logo-svg:hover circle,
+.footer-logo-svg:hover circle {
+    r: 2.5;
+    opacity: 1;
+    filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.8));
+}
+
+/* Subtle pulse animation for the central connection point */
+@keyframes hexPulse {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+
+.logo-svg circle, .footer-logo-svg circle {
+    animation: hexPulse 3s ease-in-out infinite;
 }
 
 .logo-text h2 {
