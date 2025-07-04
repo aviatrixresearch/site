@@ -73,10 +73,31 @@ h1, h2, h3, h4, h5, h6,
     gap: 1rem;
 }
 
-.logo-image {
-    height: 50px;
-    width: auto;
-    object-fit: contain;
+.logo-hexagons, .footer-logo-hexagons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-svg, .footer-logo-svg {
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3));
+}
+
+.logo-svg:hover, .footer-logo-svg:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6));
+}
+
+.logo-svg polygon, .logo-svg line,
+.footer-logo-svg polygon, .footer-logo-svg line {
+    transition: all 0.3s ease;
+}
+
+.logo-svg:hover polygon, .logo-svg:hover line,
+.footer-logo-svg:hover polygon, .footer-logo-svg:hover line {
+    stroke-width: 2px;
+    opacity: 1;
 }
 
 .logo-text h2 {
@@ -772,11 +793,7 @@ section {
     gap: 1rem;
 }
 
-.footer-logo {
-    height: 40px;
-    width: auto;
-    object-fit: contain;
-}
+/* Footer logo styles now handled by .footer-logo-hexagons above */
 
 .footer-brand-text h3 {
     background: linear-gradient(135deg, #D4AF37, #F1D592);
