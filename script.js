@@ -100,41 +100,191 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Contact form handling
-    const contactForm = document.querySelector('.contact-form form');
-    
+    // Enhanced Contact Form Functionality
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = submitBtn ? submitBtn.querySelector('.btn-text') : null;
+    const btnLoading = submitBtn ? submitBtn.querySelector('.btn-loading') : null;
+    const formMessage = document.getElementById('formMessage');
+
+    // Form validation functions
+    const validateEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    const validateField = (fieldName, value, rules) => {
+        const errorElement = document.getElementById(fieldName + 'Error');
+        const field = document.querySelector(`[name="${fieldName}"]`);
+        let isValid = true;
+        let errorMessage = '';
+
+        // Clear previous states
+        if (field) {
+            field.classList.remove('error', 'success');
+        }
+        if (errorElement) {
+            errorElement.classList.remove('show');
+        }
+
+        // Required validation
+        if (rules.required && (!value || value.trim() === '')) {
+            isValid = false;
+            errorMessage = `${rules.label} is required`;
+        }
+        // Email validation
+        else if (rules.email && value && !validateEmail(value)) {
+            isValid = false;
+            errorMessage = 'Please enter a valid email address';
+        }
+        // Minimum length validation
+        else if (rules.minLength && value && value.trim().length < rules.minLength) {
+            isValid = false;
+            errorMessage = `${rules.label} must be at least ${rules.minLength} characters`;
+        }
+
+        // Update UI
+        if (!isValid && field && errorElement) {
+            field.classList.add('error');
+            errorElement.textContent = errorMessage;
+            errorElement.classList.add('show');
+        } else if (value && value.trim() !== '' && field) {
+            field.classList.add('success');
+        }
+
+        return isValid;
+    };
+
+    // Field configuration
+    const formFields = [
+        { name: 'name', label: 'Name', required: true, minLength: 2 },
+        { name: 'email', label: 'Email', required: true, email: true },
+        { name: 'organization', label: 'Organization', required: false },
+        { name: 'message', label: 'Message', required: true, minLength: 10 }
+    ];
+
+    // Real-time validation
+    formFields.forEach(fieldConfig => {
+        const field = document.querySelector(`[name="${fieldConfig.name}"]`);
+        if (field) {
+            field.addEventListener('blur', () => {
+                validateField(fieldConfig.name, field.value, fieldConfig);
+            });
+            
+            // Clear errors on input
+            field.addEventListener('input', () => {
+                const errorElement = document.getElementById(fieldConfig.name + 'Error');
+                if (errorElement && errorElement.classList.contains('show')) {
+                    field.classList.remove('error');
+                    errorElement.classList.remove('show');
+                }
+            });
+        }
+    });
+
+    // Form submission with Formspree integration
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+
+            // Validate all fields
+            let isFormValid = true;
+            const formData = new FormData(contactForm);
             
-            // Get form data
-            const formData = new FormData(this);
-            const name = this.querySelector('input[placeholder="Name"]').value;
-            const email = this.querySelector('input[placeholder="Email"]').value;
-            const organization = this.querySelector('input[placeholder="Organization"]').value;
-            const message = this.querySelector('textarea[placeholder="Message"]').value;
-            
-            // Basic validation
-            if (!name || !email || !message) {
-                showNotification('Please fill in all required fields.', 'error');
+            formFields.forEach(fieldConfig => {
+                const value = formData.get(fieldConfig.name);
+                const isValid = validateField(fieldConfig.name, value, fieldConfig);
+                if (!isValid) isFormValid = false;
+            });
+
+            if (!isFormValid) {
+                showFormMessage('Please correct the errors above', 'error');
                 return;
             }
-            
-            if (!isValidEmail(email)) {
-                showNotification('Please enter a valid email address.', 'error');
-                return;
+
+            // Show loading state
+            if (submitBtn && btnText && btnLoading) {
+                submitBtn.disabled = true;
+                btnText.style.display = 'none';
+                btnLoading.style.display = 'flex';
             }
-            
-            // Simulate form submission
-            showNotification('Thank you for your message! We\'ll get back to you soon.', 'success');
-            this.reset();
+            hideFormMessage();
+
+            try {
+                // Submit to Formspree
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Success
+                    showFormMessage('Thank you! Your message has been sent successfully. We\'ll get back to you soon.', 'success');
+                    contactForm.reset();
+                    
+                    // Clear field states
+                    formFields.forEach(fieldConfig => {
+                        const field = document.querySelector(`[name="${fieldConfig.name}"]`);
+                        if (field) {
+                            field.classList.remove('error', 'success');
+                        }
+                        const errorElement = document.getElementById(fieldConfig.name + 'Error');
+                        if (errorElement) {
+                            errorElement.classList.remove('show');
+                        }
+                    });
+
+                    // Also show notification
+                    showNotification('Message sent successfully! We\'ll be in touch soon.', 'success');
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            } catch (error) {
+                console.error('Form submission error:', error);
+                showFormMessage('Sorry, there was an error sending your message. Please try again or contact us directly.', 'error');
+                showNotification('Error sending message. Please try again.', 'error');
+            } finally {
+                // Reset button state
+                if (submitBtn && btnText && btnLoading) {
+                    submitBtn.disabled = false;
+                    btnText.style.display = 'inline';
+                    btnLoading.style.display = 'none';
+                }
+            }
         });
     }
 
-    // Email validation function
+    // Form message functions
+    const showFormMessage = (message, type) => {
+        if (!formMessage) return;
+        
+        formMessage.textContent = message;
+        formMessage.className = `form-message ${type} show`;
+        formMessage.style.display = 'block';
+        
+        // Auto-hide success messages after 5 seconds
+        if (type === 'success') {
+            setTimeout(() => {
+                hideFormMessage();
+            }, 5000);
+        }
+    };
+
+    const hideFormMessage = () => {
+        if (!formMessage) return;
+        
+        formMessage.classList.remove('show');
+        setTimeout(() => {
+            formMessage.style.display = 'none';
+        }, 300);
+    };
+
+    // Legacy function kept for compatibility
     function isValidEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
+        return validateEmail(email);
     }
 
     // Notification system
@@ -165,8 +315,8 @@ document.addEventListener('DOMContentLoaded', function() {
             padding: 1rem 1.5rem;
             border-radius: 0;
             clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
-            box-shadow: 0 10px 25px rgba(218, 165, 32, 0.3);
-            border: 1px solid rgba(218, 165, 32, 0.5);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.5);
             z-index: 10000;
             transform: translateX(100%);
             transition: transform 0.3s ease;

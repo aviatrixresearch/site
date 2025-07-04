@@ -272,21 +272,31 @@
                     </div>
                     <div class="contact-form">
                         <h3>Partnership Inquiries</h3>
-                        <form>
+                        <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                             <div class="form-group">
-                                <input type="text" placeholder="Name" required>
+                                <input type="text" name="name" placeholder="Name" required>
+                                <span class="form-error" id="nameError"></span>
                             </div>
                             <div class="form-group">
-                                <input type="email" placeholder="Email" required>
+                                <input type="email" name="email" placeholder="Email" required>
+                                <span class="form-error" id="emailError"></span>
                             </div>
                             <div class="form-group">
-                                <input type="text" placeholder="Organization">
+                                <input type="text" name="organization" placeholder="Organization">
+                                <span class="form-error" id="organizationError"></span>
                             </div>
                             <div class="form-group">
-                                <textarea placeholder="Message" rows="5" required></textarea>
+                                <textarea name="message" placeholder="Message" rows="5" required></textarea>
+                                <span class="form-error" id="messageError"></span>
                             </div>
-                            <button type="submit" class="btn btn-primary">Send Message</button>
+                            <button type="submit" class="btn btn-primary" id="submitBtn">
+                                <span class="btn-text">Send Message</span>
+                                <span class="btn-loading" style="display: none;">
+                                    <i class="fas fa-spinner fa-spin"></i> Sending...
+                                </span>
+                            </button>
                         </form>
+                        <div id="formMessage" class="form-message" style="display: none;"></div>
                     </div>
                 </div>
             </div>
