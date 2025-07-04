@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
             position: fixed;
             top: 100px;
             right: 20px;
-            background: ${type === 'success' ? 'linear-gradient(135deg, #10b981, #059669)' : type === 'error' ? 'linear-gradient(135deg, #ef4444, #dc2626)' : 'linear-gradient(135deg, #DAA520, #FFD700)'};
+            background: ${type === 'success' ? 'linear-gradient(135deg, #10b981, #059669)' : type === 'error' ? 'linear-gradient(135deg, #ef4444, #dc2626)' : 'linear-gradient(135deg, #D4AF37, #F1D592)'};
             color: ${type === 'success' || type === 'error' ? 'white' : '#000000'};
             padding: 1rem 1.5rem;
             border-radius: 0;
