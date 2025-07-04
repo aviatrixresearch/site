@@ -113,6 +113,15 @@ body {
     width: 100%;
 }
 
+.nav-link.active {
+    color: #DAA520;
+    text-shadow: 0 0 10px rgba(218, 165, 32, 0.3);
+}
+
+.nav-link.active::after {
+    width: 100%;
+}
+
 .nav-toggle {
     display: none;
     flex-direction: column;
@@ -122,9 +131,10 @@ body {
 .bar {
     width: 25px;
     height: 3px;
-    background: #e2e8f0;
+    background: #DAA520;
     margin: 3px 0;
     transition: 0.3s;
+    box-shadow: 0 0 5px rgba(218, 165, 32, 0.3);
 }
 
 /* Hero Section */

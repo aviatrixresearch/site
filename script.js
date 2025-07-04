@@ -55,10 +55,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     window.addEventListener('scroll', function() {
         if (window.scrollY > 100) {
-            header.style.background = 'rgba(15, 23, 42, 0.98)';
+            header.style.background = 'rgba(0, 0, 0, 0.98)';
             header.style.backdropFilter = 'blur(15px)';
         } else {
-            header.style.background = 'rgba(15, 23, 42, 0.95)';
+            header.style.background = 'rgba(0, 0, 0, 0.95)';
             header.style.backdropFilter = 'blur(10px)';
         }
     });
@@ -160,11 +160,13 @@ document.addEventListener('DOMContentLoaded', function() {
             position: fixed;
             top: 100px;
             right: 20px;
-            background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
-            color: white;
+            background: ${type === 'success' ? 'linear-gradient(135deg, #10b981, #059669)' : type === 'error' ? 'linear-gradient(135deg, #ef4444, #dc2626)' : 'linear-gradient(135deg, #DAA520, #FFD700)'};
+            color: ${type === 'success' || type === 'error' ? 'white' : '#000000'};
             padding: 1rem 1.5rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-radius: 0;
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+            box-shadow: 0 10px 25px rgba(218, 165, 32, 0.3);
+            border: 1px solid rgba(218, 165, 32, 0.5);
             z-index: 10000;
             transform: translateX(100%);
             transition: transform 0.3s ease;
