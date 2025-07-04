@@ -45,14 +45,26 @@ body {
     height: 80px;
 }
 
-.nav-logo h2 {
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-image {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+.logo-text h2 {
     color: #3b82f6;
     font-weight: 700;
     font-size: 1.8rem;
     margin-bottom: 0;
 }
 
-.nav-logo span {
+.logo-text span {
     color: #94a3b8;
     font-size: 0.9rem;
     font-weight: 400;
@@ -587,13 +599,25 @@ section {
     margin-bottom: 2rem;
 }
 
-.footer-brand h3 {
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+.footer-brand-text h3 {
     color: #3b82f6;
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
 }
 
-.footer-brand p {
+.footer-brand-text p {
     color: #94a3b8;
     font-size: 0.9rem;
 }
